@@ -48,6 +48,13 @@ class CORSConfig:
     frontend_url: str = field(
         default_factory=lambda: os.getenv("FRONTEND_URL", "http://localhost:3000")
     )
+    # Allow multiple origins separated by comma
+    allow_origins: list = field(
+        default_factory=lambda: [
+            url.strip()
+            for url in os.getenv("FRONTEND_URL", "http://localhost:3000").split(",")
+        ]
+    )
     allow_credentials: bool = field(
         default_factory=lambda: os.getenv("ALLOW_CREDENTIALS", "true").lower() == "true"
     )

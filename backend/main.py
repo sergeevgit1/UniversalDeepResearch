@@ -63,7 +63,7 @@ LOGGING_CONFIG["formatters"]["default"][
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[config.cors.frontend_url],  # Frontend URL from config
+    allow_origins=config.cors.allow_origins,  # Frontend URL(s) from config
     allow_credentials=config.cors.allow_credentials,
     allow_methods=config.cors.allow_methods,
     allow_headers=config.cors.allow_headers,
