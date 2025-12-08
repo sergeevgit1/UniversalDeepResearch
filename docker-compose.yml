@@ -14,9 +14,9 @@ services:
       - LOG_LEVEL=info
       - FRONTEND_URL=http://localhost:3000
       - ALLOW_CREDENTIALS=true
-      - DEFAULT_MODEL=llama-3.1-nemotron-253b
-      - LLM_BASE_URL=https://integrate.api.nvidia.com/v1
-      - LLM_API_KEY_FILE=nvdev_api.txt
+      - DEFAULT_MODEL=openrouter/openai/gpt-oss-120b-free
+      - LLM_BASE_URL=https://openrouter.ai/api/v1
+      - LLM_API_KEY_FILE=openrouter_api.txt
       - LLM_TEMPERATURE=0.2
       - LLM_TOP_P=0.7
       - LLM_MAX_TOKENS=2048

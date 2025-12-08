@@ -30,22 +30,24 @@ cd UniversalDeepResearch
 
 ### Step 2: Configure API Keys
 
-The backend requires API keys for LLM providers and web search functionality. Create the following files in the `backend` directory:
+The backend requires API keys for LLM providers and web search functionality. The default model is a free model from OpenRouter, so only the Tavily API key is strictly required for web search functionality.
+
+Create the following files in the `backend` directory:
 
 ```bash
 # Tavily API key (required for web search)
 echo "your-tavily-api-key" > backend/tavily_api.txt
 
-# Choose one or more LLM providers:
+# OpenRouter API key (required for the default model)
+echo "your-openrouter-api-key" > backend/openrouter_api.txt
+
+# Optional LLM providers:
 
 # NVIDIA API key (optional)
 echo "your-nvidia-api-key" > backend/nvdev_api.txt
 
 # OpenAI API key (optional)
 echo "your-openai-api-key" > backend/openai_api.txt
-
-# OpenRouter API key (optional, recommended for access to multiple models)
-echo "your-openrouter-api-key" > backend/openrouter_api.txt
 ```
 
 **Important**: Make sure these files contain only the API key without any extra spaces or newlines.

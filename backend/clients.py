@@ -132,6 +132,17 @@ MODEL_CONFIGS: Dict[str, ModelConfig] = {
             "stream": True,
         },
     },
+    "openrouter/openai/gpt-oss-120b-free": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "api_type": "openrouter",
+        "completion_config": {
+            "model": "openai/gpt-oss-120b:free",
+            "temperature": 0.2,
+            "top_p": 0.7,
+            "max_tokens": 2048,
+            "stream": True,
+        },
+    },
 }
 
 # Default model to use (from configuration)

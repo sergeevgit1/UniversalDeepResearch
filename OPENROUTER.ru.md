@@ -71,6 +71,19 @@ Gemini 2.0 Flash — экспериментальная модель от Google
 - Хорошее качество для большинства задач
 - Часто доступна бесплатно
 
+### GPT-OSS 120B (Free)
+
+```env
+DEFAULT_MODEL=openrouter/openai/gpt-oss-120b-free
+```
+
+GPT-OSS 120B — бесплатная модель, которая теперь является дефолтной.
+
+**Характеристики:**
+- **Бесплатное использование**
+- Хорошее качество для общих задач
+- Отличный выбор для быстрого старта
+
 ### Mistral Large
 
 ```env
@@ -145,7 +158,8 @@ DEFAULT_MODEL=openrouter/anthropic/claude-3.5-sonnet
 ### 1. Через переменную окружения
 
 ```env
-DEFAULT_MODEL=openrouter/anthropic/claude-3.5-sonnet
+# Дефолтная модель (бесплатная)
+DEFAULT_MODEL=openrouter/openai/gpt-oss-120b-free
 ```
 
 ### 2. Через API запрос
