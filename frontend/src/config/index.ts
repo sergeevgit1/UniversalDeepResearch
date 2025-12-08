@@ -32,24 +32,40 @@ export interface AppConfig {
   frontend: {
     port: number;
     host: string;
+    url: string;
   };
 }
+
+// Helper function to validate environment variables
+const validateEnvVar = (value: string | undefined, defaultValue: string): string => {
+  if (!value) {
+    console.warn(`Environment variable not set, using default value: ${defaultValue}`);
+    return defaultValue;
+  }
+  return value;
+};
+
+// Helper function to parse boolean environment variables
+const parseBoolEnv = (value: string | undefined, defaultValue: boolean): boolean => {
+  if (!value) return defaultValue;
+  return value.toLowerCase() === 'true';
+};
 
 // Default configuration
 const defaultConfig: AppConfig = {
   backend: {
-    baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000',
+    baseUrl: validateEnvVar(process.env.NEXT_PUBLIC_BACKEND_URL, 'http://localhost:8000'),
     port: 0, // Port is now included in baseUrl
-
-    apiVersion: (process.env.NEXT_PUBLIC_API_VERSION as 'v1' | 'v2') || 'v2',
+    apiVersion: (validateEnvVar(process.env.NEXT_PUBLIC_API_VERSION, 'v2') as 'v1' | 'v2'),
   },
   runtime: {
-    dryRun: process.env.NEXT_PUBLIC_DRY_RUN === 'true',
-    enableV2Api: process.env.NEXT_PUBLIC_ENABLE_V2_API !== 'false',
+    dryRun: parseBoolEnv(process.env.NEXT_PUBLIC_DRY_RUN, false),
+    enableV2Api: parseBoolEnv(process.env.NEXT_PUBLIC_ENABLE_V2_API, true),
   },
   frontend: {
-    port: parseInt(process.env.NEXT_PUBLIC_FRONTEND_PORT || '3000'),
-    host: process.env.NEXT_PUBLIC_FRONTEND_HOST || 'localhost',
+    port: parseInt(validateEnvVar(process.env.NEXT_PUBLIC_FRONTEND_PORT, '3000')),
+    host: validateEnvVar(process.env.NEXT_PUBLIC_FRONTEND_HOST, 'localhost'),
+    url: validateEnvVar(process.env.NEXT_PUBLIC_FRONTEND_URL, 'http://localhost:3000'),
   },
 };
 
@@ -66,4 +82,20 @@ export const getApiEndpoint = (config: AppConfig = defaultConfig): string => {
   return `${baseUrl}${endpoint}`;
 };
 
-export default defaultConfig; 
+// Helper function to get the frontend URL
+export const getFrontendUrl = (config: AppConfig = defaultConfig): string => {
+  // Ensure no trailing slash for correct URL construction
+  return config.frontend.url.replace(/\/$/, '');
+};
+
+// Helper function to check if running in development
+export const isDevelopment = (): boolean => {
+  return process.env.NODE_ENV === 'development';
+};
+
+// Helper function to check if running in production
+export const isProduction = (): boolean => {
+  return process.env.NODE_ENV === 'production';
+};
+
+export default defaultConfig;

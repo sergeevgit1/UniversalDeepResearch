@@ -2,6 +2,14 @@
 
 ## Русский
 
+### Варианты развёртывания
+
+Для проекта Universal Deep Research доступны следующие варианты развёртывания:
+
+1. **Docker Compose (локальный)** - Для разработки и тестирования
+2. **Dokploy (продакшн)** - Для надёжного развёртывания в продакшн среде
+3. **Ручное развёртывание** - Для кастомных настроек
+
 ### Быстрый старт с Docker Compose
 
 1. **Клонируйте репозиторий**:
@@ -87,6 +95,44 @@ docker-compose down
 ```bash
 docker-compose down -v
 ```
+
+### Развёртывание через Dokploy (Рекомендуется для продакшн)
+
+Для надёжного развёртывания в продакшн среде рекомендуется использовать Dokploy. Подробное руководство по развёртыванию через Dokploy доступно в файле [DOKPLOY_DEPLOYMENT.md](DOKPLOY_DEPLOYMENT.md).
+
+#### Преимущества Dokploy:
+
+- Автоматическое управление SSL-сертификатами
+- Мониторинг состояния приложений
+- Автоматическое переразвертывание при обновлениях
+- Управление переменными окружения
+- Логирование и отладка
+
+#### Быстрое начало с Dokploy:
+
+1. Установите Dokploy на ваш сервер
+2. Следуйте инструкциям в [DOKPLOY_DEPLOYMENT.md](DOKPLOY_DEPLOYMENT.md)
+3. Настройте переменные окружения на основе файла [.env.dokploy.example](.env.dokploy.example)
+
+### Решённые проблемы и улучшения
+
+В последних версиях были решены следующие проблемы:
+
+#### 1. Проблема с переменными окружения
+- **Проблема**: Раньше API ключи требовалось хранить в файлах
+- **Решение**: Теперь все API ключи передаются через переменные окружения для большей безопасности
+
+#### 2. Health check для контейнеров
+- **Проблема**: Контейнеры могли запускаться, но приложение было недоступно
+- **Решение**: Добавлены надёжные health checks для обоих сервисов
+
+#### 3. CORS конфигурация
+- **Проблема**: Ошибки CORS при развёртывании на разных доменах
+- **Решение**: Улучшена конфигурация CORS с поддержкой нескольких доменов
+
+#### 4. Управление зависимостями
+- **Проблема**: Проблемы с кешированием зависимостей при сборке
+- **Решение**: Оптимизированы Dockerfile для более эффективной сборки
 
 ---
 
@@ -177,3 +223,41 @@ To remove volumes (data will be lost):
 ```bash
 docker-compose down -v
 ```
+
+### Dokploy Deployment (Recommended for Production)
+
+For reliable production deployment, we recommend using Dokploy. For detailed instructions, see [DOKPLOY_DEPLOYMENT.md](DOKPLOY_DEPLOYMENT.md).
+
+#### Dokploy Advantages:
+
+- Automatic SSL certificate management
+- Application health monitoring
+- Automatic redeployment on updates
+- Environment variable management
+- Logging and debugging
+
+#### Quick Start with Dokploy:
+
+1. Install Dokploy on your server
+2. Follow the instructions in [DOKPLOY_DEPLOYMENT.md](DOKPLOY_DEPLOYMENT.md)
+3. Configure environment variables based on [.env.dokploy.example](.env.dokploy.example)
+
+### Resolved Issues and Improvements
+
+The following issues have been resolved in recent versions:
+
+#### 1. Environment Variables Issue
+- **Issue**: Previously, API keys had to be stored in files
+- **Resolution**: All API keys are now passed through environment variables for better security
+
+#### 2. Container Health Checks
+- **Issue**: Containers could start but the application would be unavailable
+- **Resolution**: Reliable health checks have been added for both services
+
+#### 3. CORS Configuration
+- **Issue**: CORS errors when deploying on different domains
+- **Resolution**: Improved CORS configuration with support for multiple domains
+
+#### 4. Dependency Management
+- **Issue**: Dependency caching problems during build
+- **Resolution**: Optimized Dockerfiles for more efficient builds

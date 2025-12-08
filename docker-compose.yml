@@ -1,3 +1,12 @@
+networks:
+  udr-network:
+    driver: bridge
+
+volumes:
+  backend-logs:
+  backend-instances:
+  backend-mock-instances:
+
 services:
   backend:
     build:
@@ -5,7 +14,7 @@ services:
       dockerfile: Dockerfile
     container_name: udr-backend
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT:-8000}:8000"
     environment:
       - HOST=0.0.0.0
       - PORT=8000
@@ -34,17 +43,19 @@ services:
       - MAX_ITERATIONS=1024
       - INTERACTION_LEVEL=none
     volumes:
-      - ./backend/logs:/app/logs
-      - ./backend/instances:/app/instances
-      - ./backend/mock_instances:/app/mock_instances
+      - backend-logs:/app/logs
+      - backend-instances:/app/instances
+      - backend-mock-instances:/app/mock_instances
       # No need to mount API key files anymore, they are passed via environment variables
+    networks:
+      - udr-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 120s
+      test: ["CMD-SHELL", "python -c \"import requests; requests.get('http://localhost:8000/health', timeout=5)\" || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   frontend:
     build:
@@ -52,19 +63,16 @@ services:
       dockerfile: Dockerfile
     container_name: udr-frontend
     ports:
-      - "3000:3000"
+      - "${FRONTEND_PORT:-3000}:3000"
     environment:
       - NEXT_PUBLIC_BACKEND_URL=${BACKEND_URL}
       - NEXT_PUBLIC_API_VERSION=v2
       - NEXT_PUBLIC_DRY_RUN=false
       - NEXT_PUBLIC_ENABLE_V2_API=true
       - NEXT_PUBLIC_FRONTEND_URL=${FRONTEND_URL}
+    networks:
+      - udr-network
     depends_on:
       backend:
         condition: service_healthy
     restart: unless-stopped
-
-volumes:
-  backend-logs:
-  backend-instances:
-  backend-mock-instances:

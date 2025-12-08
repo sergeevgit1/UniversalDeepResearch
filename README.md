@@ -44,6 +44,21 @@ docker compose up -d
 
 See [DOCKER.md](DOCKER.md) for detailed Docker deployment instructions.
 
+### Option 3: Production Deployment with Dokploy
+
+For production environments, we recommend deploying with Dokploy for better reliability and management:
+
+- **[Dokploy Deployment Guide](DOKPLOY_DEPLOYMENT.md)** - Complete production deployment guide
+- **[Deployment Guide](DEPLOYMENT.md)** - General deployment instructions and troubleshooting
+- **[Troubleshooting Guide](TROUBLESHOOTING.md)** - Common issues and solutions
+
+Dokploy provides:
+- Automatic SSL certificate management
+- Health monitoring and alerts
+- Environment variable management
+- Automated deployments and rollbacks
+- Integrated logging and debugging
+
 ### Option 2: Manual Setup
 
 To run the prototype manually, you need to start both the backend and frontend services:
@@ -104,7 +119,13 @@ See [frontend/README.md](frontend/README.md) for detailed setup instructions, in
 
 ## Documentation
 
+### Deployment Guides
+- [Dokploy Deployment Guide](DOKPLOY_DEPLOYMENT.md) - Production deployment with Dokploy
+- [Deployment Guide](DEPLOYMENT.md) - General deployment instructions and configurations
+- [Troubleshooting Guide](TROUBLESHOOTING.md) - Common issues and solutions
 - [Docker Deployment Guide](DOCKER.md) - Docker Compose setup and deployment
+
+### Component Documentation
 - [Backend Documentation](backend/README.md) - API setup, configuration, and endpoints
 - [Frontend Documentation](frontend/README.md) - UI setup, configuration, and deployment
 

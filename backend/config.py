@@ -41,6 +41,18 @@ class ServerConfig:
     )
 
 
+def parse_origins(origins_str: str) -> list:
+    """Parse origins from string, handling comma separation and wildcards."""
+    if not origins_str:
+        return ["http://localhost:3000"]
+    
+    origins = [origin.strip().rstrip("/") for origin in origins_str.split(",")]
+    # Handle wildcard
+    if "*" in origins:
+        return ["*"]
+    return origins
+
+
 @dataclass
 class CORSConfig:
     """CORS configuration settings."""
@@ -50,16 +62,26 @@ class CORSConfig:
     )
     # Allow multiple origins separated by comma
     allow_origins: list = field(
-        default_factory=lambda: [
-            url.strip().rstrip("/")
-            for url in os.getenv("FRONTEND_URL", "http://localhost:3000").split(",")
-        ]
+        default_factory=lambda: parse_origins(
+            os.getenv("CORS_ORIGINS", os.getenv("FRONTEND_URL", "http://localhost:3000"))
+        )
     )
     allow_credentials: bool = field(
         default_factory=lambda: os.getenv("ALLOW_CREDENTIALS", "true").lower() == "true"
     )
-    allow_methods: list = field(default_factory=lambda: ["*"])
-    allow_headers: list = field(default_factory=lambda: ["*"])
+    allow_methods: list = field(
+        default_factory=lambda: os.getenv("CORS_METHODS", "*").split(",")
+        if os.getenv("CORS_METHODS") else ["*"]
+    )
+    allow_headers: list = field(
+        default_factory=lambda: os.getenv("CORS_HEADERS", "*").split(",")
+        if os.getenv("CORS_HEADERS") else ["*"]
+    )
+    expose_headers: list = field(
+        default_factory=lambda: os.getenv("CORS_EXPOSE_HEADERS", "").split(",")
+        if os.getenv("CORS_EXPOSE_HEADERS") else []
+    )
+    max_age: int = field(default_factory=lambda: int(os.getenv("CORS_MAX_AGE", "600")))
 
 
 @dataclass
