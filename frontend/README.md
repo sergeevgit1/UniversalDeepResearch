@@ -1,52 +1,52 @@
-# NVR Universal Deep Research - Frontend
+# NVR Universal Deep Research - Фронтенд
 
-A Next.js frontend application for the NVR Universal Deep Research system that provides an interactive interface for intelligent research and reporting capabilities.
+Next.js приложение для системы NVR Universal Deep Research, предоставляющее интерактивный интерфейс для интеллектуального исследования и создания отчётов.
 
-This software is provided exclusively for research and demonstration purposes. It is intended solely as a prototype to demonstrate research concepts and methodologies in artificial intelligence and automated research systems.
+Это программное обеспечение предоставляется исключительно в исследовательских и демонстрационных целях. Оно предназначено исключительно как прототип для демонстрации исследовательских концепций и методологий в области искусственного интеллекта и автоматизированных исследовательских систем.
 
-- This software is not intended for production deployment, commercial use, or any real-world application where reliability, accuracy, or safety is required.
-- This software contains experimental features, unproven methodologies, and research-grade implementations that may contain bugs, security vulnerabilities, or other issues.
-- The software is provided "AS IS" without any warranties. Neither NVIDIA Corporation nor the authors shall be liable for any damages arising from the use of this software to the fullest extent permitted by law.
+- Это программное обеспечение не предназначено для производственного развёртывания, коммерческого использования или любого реального применения, где требуется надёжность, точность или безопасность.
+- Это программное обеспечение содержит экспериментальные функции, непроверенные методологии и реализации исследовательского уровня, которые могут содержать ошибки, уязвимости безопасности или другие проблемы.
+- Программное обеспечение предоставляется "КАК ЕСТЬ" без каких-либо гарантий. Ни NVIDIA Corporation, ни авторы не несут ответственности за любой ущерб, возникший в результате использования этого программного обеспечения, в максимальной степени, разрешённой законом.
 
-By using this software, you acknowledge that you have read and understood the complete DISCLAIMER file and agree to be bound by its terms. For the complete legal disclaimer, please see the [DISCLAIMER](DISCLAIMER.txt) file in this directory.
+Используя это программное обеспечение, вы подтверждаете, что прочитали и поняли полный файл DISCLAIMER и согласны соблюдать его условия. Для получения полного юридического отказа от ответственности, пожалуйста, ознакомьтесь с файлом [DISCLAIMER](DISCLAIMER.txt) в этом каталоге.
 
-## Features
+## Возможности
 
-- Interactive research interface with real-time progress tracking
-- Configurable research strategies
-- Support for both V1 and V2 API endpoints
-- Dry run mode for testing
-- Real-time report generation and viewing
+- Интерактивный интерфейс исследований с отслеживанием прогресса в реальном времени
+- Настраиваемые стратегии исследований
+- Поддержка конечных точек API V1 и V2
+- Режим пробного запуска для тестирования
+- Генерация и просмотр отчётов в реальном времени
 
-## Configuration
+## Конфигурация
 
-The frontend application is highly configurable through environment variables. Copy the example environment file and customize it for your deployment:
+Фронтенд-приложение легко настраивается через переменные окружения. Скопируйте пример файла окружения и настройте его для вашего развёртывания:
 
 ```bash
 cp env.example .env.local
 ```
 
-### Environment Variables
+### Переменные окружения
 
-#### Backend API Configuration
+#### Конфигурация Backend API
 
-- `NEXT_PUBLIC_BACKEND_BASE_URL`: The base URL of your backend server (default: `http://localhost`)
-- `NEXT_PUBLIC_BACKEND_PORT`: The port your backend server is running on (default: `8000`)
-- `NEXT_PUBLIC_API_VERSION`: API version to use - `v1` or `v2` (default: `v2`)
+- `NEXT_PUBLIC_BACKEND_BASE_URL`: Базовый URL вашего backend-сервера (по умолчанию: `http://localhost`)
+- `NEXT_PUBLIC_BACKEND_PORT`: Порт, на котором работает ваш backend-сервер (по умолчанию: `8000`)
+- `NEXT_PUBLIC_API_VERSION`: Версия API для использования - `v1` или `v2` (по умолчанию: `v2`)
 
-#### Runtime Configuration
+#### Конфигурация выполнения
 
-- `NEXT_PUBLIC_DRY_RUN`: Enable dry run mode - `true` or `false` (default: `false`)
-- `NEXT_PUBLIC_ENABLE_V2_API`: Enable V2 API - `true` or `false` (default: `true`)
+- `NEXT_PUBLIC_DRY_RUN`: Включить режим пробного запуска - `true` или `false` (по умолчанию: `false`)
+- `NEXT_PUBLIC_ENABLE_V2_API`: Включить V2 API - `true` или `false` (по умолчанию: `true`)
 
-#### Frontend Configuration
+#### Конфигурация фронтенда
 
-- `NEXT_PUBLIC_FRONTEND_PORT`: The port for the frontend development server (default: `3000`)
-- `NEXT_PUBLIC_FRONTEND_HOST`: The host for the frontend development server (default: `localhost`)
+- `NEXT_PUBLIC_FRONTEND_PORT`: Порт для сервера разработки фронтенда (по умолчанию: `3000`)
+- `NEXT_PUBLIC_FRONTEND_HOST`: Хост для сервера разработки фронтенда (по умолчанию: `localhost`)
 
-### Example Configuration
+### Пример конфигурации
 
-For a production deployment with a backend on a different server:
+Для производственного развёртывания с backend на другом сервере:
 
 ```bash
 NEXT_PUBLIC_BACKEND_BASE_URL=http://your-backend-server.com
@@ -56,7 +56,7 @@ NEXT_PUBLIC_DRY_RUN=false
 NEXT_PUBLIC_ENABLE_V2_API=true
 ```
 
-For local development:
+Для локальной разработки:
 
 ```bash
 NEXT_PUBLIC_BACKEND_BASE_URL=http://localhost
@@ -66,106 +66,106 @@ NEXT_PUBLIC_DRY_RUN=true
 NEXT_PUBLIC_ENABLE_V2_API=true
 ```
 
-## Getting Started
+## Начало работы
 
-1. **Install dependencies:**
+1. **Установите зависимости:**
 
    ```bash
    npm install
    ```
 
-2. **Configure environment variables:**
+2. **Настройте переменные окружения:**
 
    ```bash
    cp env.example .env.local
-   # Edit .env.local with your configuration
+   # Отредактируйте .env.local с вашей конфигурацией
    ```
 
-3. **Run the development server:**
+3. **Запустите сервер разработки:**
 
    ```bash
    npm run dev
    ```
 
-4. **Open your browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+4. **Откройте браузер:**
+   Перейдите по адресу [http://localhost:3000](http://localhost:3000), чтобы увидеть приложение.
 
-## Available Scripts
+## Доступные скрипты
 
-- `npm run dev` - Start the development server with Turbopack
-- `npm run build` - Build the application for production
-- `npm run start` - Start the production server
-- `npm run lint` - Run ESLint
+- `npm run dev` - Запустить сервер разработки с Turbopack
+- `npm run build` - Собрать приложение для production
+- `npm run start` - Запустить production-сервер
+- `npm run lint` - Запустить ESLint
 
-## Project Structure
+## Структура проекта
 
 ```
 src/
-├── app/                 # Next.js app directory
-│   ├── page.tsx        # Main application page
-│   ├── layout.tsx      # Root layout
-│   └── globals.css     # Global styles
-├── components/         # React components
-│   ├── PromptBar.tsx   # Main input interface
-│   ├── ResearchProgressList.tsx  # Progress tracking
-│   ├── ReportViewer.tsx # Report display
-│   └── ...            # Other UI components
-├── config/            # Configuration management
-│   └── index.ts       # App configuration
-└── types/             # TypeScript type definitions
+├── app/                 # Директория приложения Next.js
+│   ├── page.tsx        # Главная страница приложения
+│   ├── layout.tsx      # Корневой layout
+│   └── globals.css     # Глобальные стили
+├── components/         # React-компоненты
+│   ├── PromptBar.tsx   # Основной интерфейс ввода
+│   ├── ResearchProgressList.tsx  # Отслеживание прогресса
+│   ├── ReportViewer.tsx # Отображение отчёта
+│   └── ...            # Другие UI-компоненты
+├── config/            # Управление конфигурацией
+│   └── index.ts       # Конфигурация приложения
+└── types/             # Определения типов TypeScript
     └── ApplicationState.ts
 ```
 
-## Backend Requirements
+## Требования к Backend
 
-This frontend requires a compatible backend server running the NVR Universal Deep Research API. The backend should:
+Этот фронтенд требует совместимого backend-сервера, работающего с NVR Universal Deep Research API. Backend должен:
 
-- Support both `/api/research` (V1) and `/api/research2` (V2) endpoints
-- Accept POST requests with JSON payloads
-- Return Server-Sent Events (SSE) for real-time progress updates
-- Support the dry run mode parameter
+- Поддерживать конечные точки `/api/research` (V1) и `/api/research2` (V2)
+- Принимать POST-запросы с JSON-данными
+- Возвращать Server-Sent Events (SSE) для обновлений прогресса в реальном времени
+- Поддерживать параметр режима пробного запуска
 
-## Deployment
+## Развёртывание
 
-The application can be deployed to any platform that supports Next.js:
+Приложение может быть развёрнуто на любой платформе, поддерживающей Next.js:
 
-1. Build the application: `npm run build`
-2. Start the production server: `npm run start`
-3. Set the appropriate environment variables for your deployment
+1. Соберите приложение: `npm run build`
+2. Запустите production-сервер: `npm run start`
+3. Установите соответствующие переменные окружения для вашего развёртывания
 
-### Example Deployment Platforms
+### Примеры платформ развёртывания
 
-- **Vercel**: Connect your Git repository and set environment variables in the dashboard
-- **Netlify**: Build and deploy with environment variable configuration
-- **Railway**: Deploy with automatic environment variable management
-- **Self-hosted**: Run on your own server with proper environment configuration
+- **Vercel**: Подключите ваш Git-репозиторий и установите переменные окружения в панели управления
+- **Netlify**: Сборка и развёртывание с конфигурацией переменных окружения
+- **Railway**: Развёртывание с автоматическим управлением переменными окружения
+- **Самостоятельный хостинг**: Запуск на вашем собственном сервере с правильной конфигурацией окружения
 
-## Troubleshooting
+## Устранение неполадок
 
-### Common Issues
+### Распространённые проблемы
 
-1. **Backend Connection Errors**: Ensure your backend server is running and the `NEXT_PUBLIC_BACKEND_BASE_URL` and `NEXT_PUBLIC_BACKEND_PORT` are correctly configured.
+1. **Ошибки подключения к Backend**: Убедитесь, что ваш backend-сервер работает и `NEXT_PUBLIC_BACKEND_BASE_URL` и `NEXT_PUBLIC_BACKEND_PORT` настроены правильно.
 
-2. **CORS Errors**: Make sure your backend server allows requests from your frontend domain.
+2. **Ошибки CORS**: Убедитесь, что ваш backend-сервер разрешает запросы с вашего фронтенд-домена.
 
-3. **API Version Issues**: If you're experiencing API compatibility issues, try switching between `v1` and `v2` using the `NEXT_PUBLIC_API_VERSION` environment variable.
+3. **Проблемы с версией API**: Если вы испытываете проблемы совместимости API, попробуйте переключиться между `v1` и `v2`, используя переменную окружения `NEXT_PUBLIC_API_VERSION`.
 
-### Development Tips
+### Советы по разработке
 
-- Use `NEXT_PUBLIC_DRY_RUN=true` during development to avoid making actual API calls
-- The application supports hot reloading - changes to your code will be reflected immediately
-- Check the browser console for detailed error messages
+- Используйте `NEXT_PUBLIC_DRY_RUN=true` во время разработки, чтобы избежать реальных вызовов API
+- Приложение поддерживает горячую перезагрузку - изменения в вашем коде будут отражены немедленно
+- Проверьте консоль браузера для подробных сообщений об ошибках
 
-## Contributing
+## Вклад в проект
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+1. Сделайте fork репозитория
+2. Создайте ветку для функции
+3. Внесите изменения
+4. Тщательно протестируйте
+5. Отправьте pull request
 
-## License and Disclaimer
+## Лицензия и отказ от ответственности
 
-This software is provided for research and demonstration purposes only. Please refer to the [DISCLAIMER](DISCLAIMER.txt) file for complete terms and conditions regarding the use of this software. You can find the license in [LICENSE](LICENSE.txt).
+Это программное обеспечение предоставляется только в исследовательских и демонстрационных целях. Пожалуйста, обратитесь к файлу [DISCLAIMER](DISCLAIMER.txt) для получения полных условий использования этого программного обеспечения. Вы можете найти лицензию в [LICENSE](LICENSE.txt).
 
-**Do not use this code in production.**
+**Не используйте этот код в production.**

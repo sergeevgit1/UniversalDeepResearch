@@ -1,201 +1,201 @@
 # Universal Deep Research Backend (UDR-B)
 
-A FastAPI-based backend service that provides intelligent research and reporting capabilities using large language models and web search APIs. The system can perform comprehensive research on user queries, aggregate findings, and generate detailed reports.
+Backend-сервис на основе FastAPI, который предоставляет возможности интеллектуального исследования и создания отчётов с использованием больших языковых моделей и API веб-поиска. Система может выполнять всестороннее исследование по пользовательским запросам, агрегировать результаты и генерировать подробные отчёты.
 
-This software is provided exclusively for research and demonstration purposes. It is intended solely as a prototype to demonstrate research concepts and methodologies in artificial intelligence and automated research systems.
+Это программное обеспечение предоставляется исключительно в исследовательских и демонстрационных целях. Оно предназначено исключительно как прототип для демонстрации исследовательских концепций и методологий в области искусственного интеллекта и автоматизированных исследовательских систем.
 
-- This software is not intended for production deployment, commercial use, or any real-world application where reliability, accuracy, or safety is required.
-- This software contains experimental features, unproven methodologies, and research-grade implementations that may contain bugs, security vulnerabilities, or other issues.
-- The software is provided "AS IS" without any warranties. Neither NVIDIA Corporation nor the authors shall be liable for any damages arising from the use of this software to the fullest extent permitted by law.
+- Это программное обеспечение не предназначено для производственного развёртывания, коммерческого использования или любого реального применения, где требуется надёжность, точность или безопасность.
+- Это программное обеспечение содержит экспериментальные функции, непроверенные методологии и реализации исследовательского уровня, которые могут содержать ошибки, уязвимости безопасности или другие проблемы.
+- Программное обеспечение предоставляется "КАК ЕСТЬ" без каких-либо гарантий. Ни NVIDIA Corporation, ни авторы не несут ответственности за любой ущерб, возникший в результате использования этого программного обеспечения, в максимальной степени, разрешённой законом.
 
-By using this software, you acknowledge that you have read and understood the complete DISCLAIMER file and agree to be bound by its terms. For the complete legal disclaimer, please see the [DISCLAIMER](DISCLAIMER.txt) file in this directory.
+Используя это программное обеспечение, вы подтверждаете, что прочитали и поняли полный файл DISCLAIMER и согласны соблюдать его условия. Для получения полного юридического отказа от ответственности, пожалуйста, ознакомьтесь с файлом [DISCLAIMER](DISCLAIMER.txt) в этом каталоге.
 
-## Features
+## Возможности
 
-- **Intelligent Research**: Automated web search and content analysis using Tavily API
-- **Multi-Model Support**: Configurable LLM backends (OpenAI, NVIDIA, local vLLM)
-- **Streaming Responses**: Real-time progress updates via Server-Sent Events
-- **Session Management**: Persistent research sessions with unique identifiers
-- **Flexible Architecture**: Modular design with configurable components
-- **Dry Run Mode**: Testing capabilities with mock data
-- **Advanced Framing**: Custom FrameV4 system for increased reliability of instruction following across all models
+- **Интеллектуальное исследование**: Автоматизированный веб-поиск и анализ контента с использованием Tavily API
+- **Поддержка множества моделей**: Настраиваемые LLM backend'ы (OpenAI, NVIDIA, локальный vLLM)
+- **Потоковые ответы**: Обновления прогресса в реальном времени через Server-Sent Events
+- **Управление сессиями**: Постоянные исследовательские сессии с уникальными идентификаторами
+- **Гибкая архитектура**: Модульный дизайн с настраиваемыми компонентами
+- **Режим пробного запуска**: Возможности тестирования с mock-данными
+- **Расширенное фреймирование**: Пользовательская система FrameV4 для повышения надёжности следования инструкциям во всех моделях
 
-## Architecture
+## Архитектура
 
-The backend consists of several key components:
+Backend состоит из нескольких ключевых компонентов:
 
-- **`main.py`**: FastAPI application with research endpoints
-- **`scan_research.py`**: Core research and reporting logic
-- **`clients.py`**: LLM and search API client management
-- **`frame/`**: Advanced reliability framework (FrameV4)
-- **`items.py`**: Data persistence utilities
-- **`sessions.py`**: Session key generation and management
+- **`main.py`**: FastAPI-приложение с конечными точками исследований
+- **`scan_research.py`**: Основная логика исследований и создания отчётов
+- **`clients.py`**: Управление клиентами LLM и поисковых API
+- **`frame/`**: Расширенный фреймворк надёжности (FrameV4)
+- **`items.py`**: Утилиты для сохранения данных
+- **`sessions.py`**: Генерация и управление ключами сессий
 
-## Quick Start
+## Быстрый старт
 
-### Prerequisites
+### Предварительные требования
 
 - Python 3.8+
-- API keys for your chosen LLM provider
-- Tavily API key for web search functionality
+- API-ключи для выбранного вами провайдера LLM
+- API-ключ Tavily для функциональности веб-поиска
 
-### Installation
+### Установка
 
-#### Option 1: Automated Setup (Recommended)
+#### Вариант 1: Автоматическая установка (рекомендуется)
 
-The easiest way to set up the backend is using the provided `setup.py` script:
+Самый простой способ настроить backend - использовать предоставленный скрипт `setup.py`:
 
-1. **Clone the repository**:
+1. **Клонируйте репозиторий**:
 
    ```bash
    git clone <repository-url>
    cd backend
    ```
 
-2. **Run the setup script**:
+2. **Запустите скрипт установки**:
 
    ```bash
    python3 setup.py
    ```
 
-   The setup script will:
+   Скрипт установки выполнит:
 
-   - Check Python version compatibility
-   - Create necessary directories (`logs/`, `instances/`, `mock_instances/`)
-   - Set up environment configuration (`.env` file)
-   - Check for required API key files
-   - Install Python dependencies
-   - Validate the setup
+   - Проверку совместимости версии Python
+   - Создание необходимых директорий (`logs/`, `instances/`, `mock_instances/`)
+   - Настройку конфигурации окружения (файл `.env`)
+   - Проверку наличия необходимых файлов с API-ключами
+   - Установку зависимостей Python
+   - Проверку установки
 
-3. **Configure API keys**:
-   Create the following files with your API keys:
+3. **Настройте API-ключи**:
+   Создайте следующие файлы с вашими API-ключами:
 
    ```bash
    echo "your-tavily-api-key" > tavily_api.txt
-   echo "your-llm-api-key" > nvdev_api.txt  # or openai_api.txt
+   echo "your-llm-api-key" > nvdev_api.txt  # или openai_api.txt
    ```
 
-4. **Start the server**:
+4. **Запустите сервер**:
 
    ```bash
    ./launch_server.sh
    ```
 
-   **Note**: The `launch_server.sh` script is the recommended way to start the server as it:
+   **Примечание**: Скрипт `launch_server.sh` является рекомендуемым способом запуска сервера, так как он:
 
-   - Automatically loads environment variables from `.env`
-   - Sets proper default configurations
-   - Runs the server in the background with logging
-   - Provides process management information
+   - Автоматически загружает переменные окружения из `.env`
+   - Устанавливает правильные конфигурации по умолчанию
+   - Запускает сервер в фоновом режиме с логированием
+   - Предоставляет информацию об управлении процессами
 
-#### Option 2: Manual Setup
+#### Вариант 2: Ручная установка
 
-If you prefer to set up the backend manually, follow these steps:
+Если вы предпочитаете настроить backend вручную, выполните следующие шаги:
 
-1. **Clone the repository**:
+1. **Клонируйте репозиторий**:
 
    ```bash
    git clone <repository-url>
    cd backend
    ```
 
-2. **Create virtual environment**:
+2. **Создайте виртуальное окружение**:
 
    ```bash
    python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate  # На Windows: venv\Scripts\activate
    ```
 
-3. **Install dependencies**:
+3. **Установите зависимости**:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Create necessary directories**:
+4. **Создайте необходимые директории**:
 
    ```bash
    mkdir -p logs instances mock_instances
    ```
 
-5. **Set up environment configuration**:
-   Copy the example environment file and configure it:
+5. **Настройте конфигурацию окружения**:
+   Скопируйте пример файла окружения и настройте его:
 
    ```bash
    cp env.example .env
-   # Edit .env file with your configuration
+   # Отредактируйте файл .env с вашей конфигурацией
    ```
 
-6. **Configure API keys**:
-   Create the following files with your API keys:
+6. **Настройте API-ключи**:
+   Создайте следующие файлы с вашими API-ключами:
 
    ```bash
    echo "your-tavily-api-key" > tavily_api.txt
-   echo "your-llm-api-key" > nvdev_api.txt  # or e.g., openai_api.txt
+   echo "your-llm-api-key" > nvdev_api.txt  # или, например, openai_api.txt
    ```
 
-7. **Start the server**:
+7. **Запустите сервер**:
 
    ```bash
    ./launch_server.sh
    ```
 
-   **Note**: As noted for Option 1, the `launch_server.sh` script is the recommended way to start the server as it:
+   **Примечание**: Как отмечено для варианта 1, скрипт `launch_server.sh` является рекомендуемым способом запуска сервера, так как он:
 
-   - Automatically loads environment variables from `.env`
-   - Sets proper default configurations
-   - Runs the server in the background with logging
-   - Provides process management information
+   - Автоматически загружает переменные окружения из `.env`
+   - Устанавливает правильные конфигурации по умолчанию
+   - Запускает сервер в фоновом режиме с логированием
+   - Предоставляет информацию об управлении процессами
 
-The server will be available at `http://localhost:8000`
+Сервер будет доступен по адресу `http://localhost:8000`
 
-You can now quickly test the server.
+Теперь вы можете быстро протестировать сервер.
 
 ```bash
 curl -X POST http://localhost:8000/api/research \
   -H "Content-Type: application/json" \
   -d '{
-    "prompt": "What are the latest developments in quantum computing?",
+    "prompt": "Какие последние разработки в области квантовых вычислений?",
     "start_from": "research"
   }'
 ```
 
-## Configuration
+## Конфигурация
 
-### Environment Variables
+### Переменные окружения
 
-Create a `.env` file in the backend directory:
+Создайте файл `.env` в директории backend:
 
 ```env
-# Server Configuration
+# Конфигурация сервера
 HOST=0.0.0.0
 PORT=8000
 LOG_LEVEL=info
 
-# CORS Configuration
+# Конфигурация CORS
 FRONTEND_URL=http://localhost:3000
 
-# Model Configuration
+# Конфигурация модели
 DEFAULT_MODEL=llama-3.1-nemotron-253b
 LLM_BASE_URL=https://integrate.api.nvidia.com/v1
 LLM_API_KEY_FILE=nvdev_api.txt
 
-# Search Configuration
+# Конфигурация поиска
 TAVILY_API_KEY_FILE=tavily_api.txt
 
-# Research Configuration
+# Конфигурация исследований
 MAX_TOPICS=1
 MAX_SEARCH_PHRASES=1
 MOCK_DIRECTORY=mock_instances/stocks_24th_3_sections
 
-# Logging Configuration
+# Конфигурация логирования
 LOG_DIR=logs
 TRACE_ENABLED=true
 ```
 
-### Model Configuration
+### Конфигурация модели
 
-The system supports multiple LLM providers. Configure models in `clients.py`:
+Система поддерживает множество провайдеров LLM. Настройте модели в `clients.py`:
 
 ```python
 MODEL_CONFIGS = {
@@ -210,122 +210,122 @@ MODEL_CONFIGS = {
             "stream": True
         }
     },
-    # Add more models as needed
+    # Добавьте больше моделей по необходимости
 }
 ```
 
-### API Key Files
+### Файлы с API-ключами
 
-The system expects API keys in text files:
+Система ожидает API-ключи в текстовых файлах:
 
-- `tavily_api.txt`: Tavily search API key
-- `nvdev_api.txt`: NVIDIA API key
-- `openai_api.txt`: OpenAI API key
+- `tavily_api.txt`: API-ключ поиска Tavily
+- `nvdev_api.txt`: API-ключ NVIDIA
+- `openai_api.txt`: API-ключ OpenAI
 
-## API Endpoints
+## Конечные точки API
 
 ### GET `/`
 
-Health check endpoint that returns a status message.
+Конечная точка проверки работоспособности, которая возвращает сообщение о статусе.
 
 ### POST `/api/research`
 
-Main research endpoint that performs research and generates reports.
+Основная конечная точка исследований, которая выполняет исследование и генерирует отчёты.
 
-**Request Body**:
+**Тело запроса**:
 
 ```json
 {
   "dry": false,
   "session_key": "optional-session-key",
   "start_from": "research",
-  "prompt": "Your research query here",
+  "prompt": "Ваш исследовательский запрос здесь",
   "mock_directory": "mock_instances/stocks_24th_3_sections"
 }
 ```
 
-**Parameters**:
+**Параметры**:
 
-- `dry` (boolean): Use mock data for testing
-- `session_key` (string, optional): Existing session to continue
-- `start_from` (string): "research" or "reporting"
-- `prompt` (string): Research query (required for research phase)
-- `mock_directory` (string): Directory for mock data
+- `dry` (boolean): Использовать mock-данные для тестирования
+- `session_key` (string, необязательно): Существующая сессия для продолжения
+- `start_from` (string): "research" или "reporting"
+- `prompt` (string): Исследовательский запрос (обязателен для фазы исследования)
+- `mock_directory` (string): Директория для mock-данных
 
-**Response**: Server-Sent Events stream with research progress
+**Ответ**: Поток Server-Sent Events с прогрессом исследования
 
 ### POST `/api/research2`
 
-Advanced reliability framework endpoint using FrameV4 system. This is the endpoint that supports custom user deep research strategies.
+Конечная точка расширенного фреймворка надёжности с использованием системы FrameV4. Это конечная точка, которая поддерживает пользовательские стратегии глубокого исследования.
 
-**Request Body**:
+**Тело запроса**:
 
 ```json
 {
-  "prompt": "Your research query",
+  "prompt": "Ваш исследовательский запрос",
   "strategy_id": "custom-strategy",
-  "strategy_content": "Custom research strategy"
+  "strategy_content": "Пользовательская стратегия исследования"
 }
 ```
 
-## Usage Examples
+## Примеры использования
 
-### Basic Research Request
+### Базовый запрос исследования
 
 ```bash
 curl -X POST http://localhost:8000/api/research \
   -H "Content-Type: application/json" \
   -d '{
-    "prompt": "What are the latest developments in quantum computing?",
+    "prompt": "Какие последние разработки в области квантовых вычислений?",
     "start_from": "research"
   }'
 ```
 
-### Dry Run Testing
+### Тестирование в режиме пробного запуска
 
 ```bash
 curl -X POST http://localhost:8000/api/research \
   -H "Content-Type: application/json" \
   -d '{
     "dry": true,
-    "prompt": "Test research query",
+    "prompt": "Тестовый исследовательский запрос",
     "start_from": "research"
   }'
 ```
 
-### Continue from Reporting Phase
+### Продолжение с фазы создания отчёта
 
 ```bash
 curl -X POST http://localhost:8000/api/research \
   -H "Content-Type: application/json" \
   -d '{
-    "session_key": "20241201T120000Z-abc12345", # This would be the key of the session which you have previously started
+    "session_key": "20241201T120000Z-abc12345", # Это будет ключ сессии, которую вы ранее запустили
     "start_from": "reporting"
   }'
 ```
 
-## Development
+## Разработка
 
-### Logging
+### Логирование
 
-Logs are stored in the `logs/` directory:
+Логи хранятся в директории `logs/`:
 
-- `comms_YYYYMMDD_HH-MM-SS.log`: Communication traces
-- `{instance_id}_compilation.log`: Frame compilation logs
-- `{instance_id}_execution.log`: Frame execution logs
+- `comms_YYYYMMDD_HH-MM-SS.log`: Трассировки коммуникаций
+- `{instance_id}_compilation.log`: Логи компиляции фреймов
+- `{instance_id}_execution.log`: Логи выполнения фреймов
 
-### Mock Data
+### Mock-данные
 
-Mock research data is available in `mock_instances/`:
+Mock-данные исследований доступны в `mock_instances/`:
 
-- `stocks_24th_3_sections/`: Stock market research data
-- `stocks_30th_short/`: Short stock market data
+- `stocks_24th_3_sections/`: Данные исследований фондового рынка
+- `stocks_30th_short/`: Краткие данные фондового рынка
 
-## Deployment
+## Развёртывание
 
-### Production Deployment
+### Производственное развёртывание
 
-1. **Set up environment**:
+1. **Настройте окружение**:
 
    ```bash
    export HOST=0.0.0.0
@@ -333,18 +333,18 @@ Mock research data is available in `mock_instances/`:
    export LOG_LEVEL=info
    ```
 
-2. **Run with gunicorn**:
+2. **Запустите с gunicorn**:
 
    ```bash
    pip install gunicorn
    gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
    ```
 
-   **Note**: For development, prefer using `./launch_server.sh` which provides better process management and logging.
+   **Примечание**: Для разработки предпочтительнее использовать `./launch_server.sh`, который обеспечивает лучшее управление процессами и логирование.
 
-### Docker Deployment
+### Развёртывание в Docker
 
-Create a `Dockerfile`:
+Создайте `Dockerfile`:
 
 ```dockerfile
 FROM python:3.9-slim
@@ -359,48 +359,48 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-## Troubleshooting
+## Устранение неполадок
 
-### Common Issues
+### Распространённые проблемы
 
-1. **API Key Errors**: Ensure API key files exist and contain valid keys
-2. **CORS Errors**: Check `FRONTEND_URL` configuration
-3. **Model Errors**: Verify model configuration in `clients.py`
-4. **Permission Errors**: Ensure write permissions for `logs/` and `instances/` directories
+1. **Ошибки API-ключей**: Убедитесь, что файлы с API-ключами существуют и содержат действительные ключи
+2. **Ошибки CORS**: Проверьте конфигурацию `FRONTEND_URL`
+3. **Ошибки модели**: Проверьте конфигурацию модели в `clients.py`
+4. **Ошибки прав доступа**: Убедитесь в наличии прав на запись для директорий `logs/` и `instances/`
 
-### Debug Mode
+### Режим отладки
 
-Enable debug logging by setting the LOG_LEVEL environment variable:
+Включите отладочное логирование, установив переменную окружения LOG_LEVEL:
 
 ```bash
 export LOG_LEVEL=debug
 ./launch_server.sh
 ```
 
-Or run uvicorn directly for debugging:
+Или запустите uvicorn напрямую для отладки:
 
 ```bash
 uvicorn main:app --reload --log-level=debug
 ```
 
-## Contributing
+## Вклад в проект
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+1. Сделайте fork репозитория
+2. Создайте ветку для функции
+3. Внесите изменения
+4. Добавьте тесты, если применимо
+5. Отправьте pull request
 
-## License and Disclaimer
+## Лицензия и отказ от ответственности
 
-This software is provided for research and demonstration purposes only. Please refer to the [DISCLAIMER](DISCLAIMER.txt) file for complete terms and conditions regarding the use of this software. You can find the license in [LICENSE](LICENSE.txt).
+Это программное обеспечение предоставляется только в исследовательских и демонстрационных целях. Пожалуйста, обратитесь к файлу [DISCLAIMER](DISCLAIMER.txt) для получения полных условий использования этого программного обеспечения. Вы можете найти лицензию в [LICENSE](LICENSE.txt).
 
-**Do not use this code in production.**
+**Не используйте этот код в production.**
 
-## Support
+## Поддержка
 
-For issues and questions:
+По вопросам и проблемам:
 
-- Create an issue in the repository
-- Check the logs in the `logs/` directory
-- Review the configuration settings
+- Создайте issue в репозитории
+- Проверьте логи в директории `logs/`
+- Просмотрите настройки конфигурации

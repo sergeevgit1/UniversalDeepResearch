@@ -40,6 +40,7 @@ const iconMap = {
   'aggregation_started': ArchiveBoxIcon,
   'research_completed': CheckCircleIcon,
   'report_building': Cog8ToothIcon,
+  'report_formatting': LightBulbIcon,
   'report_processing': LightBulbIcon,
   'report_done': DocumentTextIcon,
   'generic': ChatBubbleLeftEllipsisIcon
