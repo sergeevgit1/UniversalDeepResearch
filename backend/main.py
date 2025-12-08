@@ -91,6 +91,11 @@ async def root():
     }
 
 
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+
+
 def build_events_path(session_key: str) -> str:
     return f"instances/{session_key}.events.jsonl"
 
