@@ -38,8 +38,9 @@ export interface AppConfig {
 // Default configuration
 const defaultConfig: AppConfig = {
   backend: {
-    baseUrl: process.env.NEXT_PUBLIC_BACKEND_BASE_URL || 'http://localhost',
-    port: parseInt(process.env.NEXT_PUBLIC_BACKEND_PORT || '8000'),
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000',
+    port: 0, // Port is now included in baseUrl
+
     apiVersion: (process.env.NEXT_PUBLIC_API_VERSION as 'v1' | 'v2') || 'v2',
   },
   runtime: {
@@ -54,7 +55,7 @@ const defaultConfig: AppConfig = {
 
 // Helper function to get the full backend URL
 export const getBackendUrl = (config: AppConfig = defaultConfig): string => {
-  return `${config.backend.baseUrl}:${config.backend.port}`;
+  return config.backend.baseUrl;
 };
 
 // Helper function to get the API endpoint

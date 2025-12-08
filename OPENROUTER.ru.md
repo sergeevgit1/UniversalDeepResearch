@@ -119,10 +119,12 @@ API ключи теперь задаются через переменные о�
 cp .env.example .env
 ```
 
-2. **Заполните `.env`** вашим ключом OpenRouter:
+2. **Заполните `.env`** вашим ключом OpenRouter и URL сервисов:
 ```env
 # .env file content (пример)
 OPENROUTER_API_KEY=ваш-openrouter-api-ключ
+FRONTEND_URL=http://localhost:3000
+BACKEND_URL=http://localhost:8000
 ```
 
 3. **Запустите сервисы**:
@@ -140,10 +142,12 @@ cd backend
 cp env.example .env
 ```
 
-2. **Заполните `.env`** вашим ключом OpenRouter:
+2. **Заполните `.env`** вашим ключом OpenRouter и URL сервисов:
 ```env
 # .env file content (пример)
 OPENROUTER_API_KEY=ваш-openrouter-api-ключ
+FRONTEND_URL=http://localhost:3000
+BACKEND_URL=http://localhost:8000
 ```
 
 3. **Запустите backend**:

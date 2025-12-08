@@ -12,7 +12,7 @@ services:
       - HOST=0.0.0.0
       - PORT=8000
       - LOG_LEVEL=info
-      - FRONTEND_URL=http://localhost:3000
+      - FRONTEND_URL=${FRONTEND_URL}
       - ALLOW_CREDENTIALS=true
       - DEFAULT_MODEL=openrouter/openai/gpt-oss-120b-free
       - LLM_BASE_URL=https://openrouter.ai/api/v1
@@ -56,13 +56,11 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_BACKEND_BASE_URL=http://localhost
-      - NEXT_PUBLIC_BACKEND_PORT=8000
+      - NEXT_PUBLIC_BACKEND_URL=${BACKEND_URL}
       - NEXT_PUBLIC_API_VERSION=v2
       - NEXT_PUBLIC_DRY_RUN=false
       - NEXT_PUBLIC_ENABLE_V2_API=true
-      - NEXT_PUBLIC_FRONTEND_PORT=3000
-      - NEXT_PUBLIC_FRONTEND_HOST=localhost
+      - NEXT_PUBLIC_FRONTEND_URL=${FRONTEND_URL}
     depends_on:
       backend:
         condition: service_healthy

@@ -56,13 +56,15 @@
 git clone https://github.com/sergeevgit1/UniversalDeepResearch.git
 cd UniversalDeepResearch
 
-# 2. Настроить API ключи
-# API ключи теперь задаются через переменные окружения в файле .env.
-# Скопируйте .env.example в .env и заполните ключи.
+# 2. Настроить переменные окружения
+# Все ключи и URL теперь задаются через переменные окружения в файле .env.
+# Скопируйте .env.example в .env и заполните необходимые поля.
 cp .env.example .env
 # Откройте .env и заполните:
 # OPENROUTER_API_KEY=ваш-openrouter-api-ключ
 # TAVILY_API_KEY=ваш-tavily-api-ключ
+# FRONTEND_URL=http://localhost:3000
+# BACKEND_URL=http://localhost:8000
 
 # 3. Запустить сервисы
 docker compose up -d

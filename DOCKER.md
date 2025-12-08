@@ -37,10 +37,15 @@ API keys are now configured using environment variables in the `.env` file (whic
 cp .env.example .env
 ```
 
-2. **Edit the `.env` file** and set your API keys. The default model requires `OPENROUTER_API_KEY` and `TAVILY_API_KEY`.
+2. **Edit the `.env` file** and set your API keys and service URLs. The default model requires `OPENROUTER_API_KEY` and `TAVILY_API_KEY`.
 
 ```env
 # .env file content (example)
+# Service URLs
+FRONTEND_URL=http://localhost:3000
+BACKEND_URL=http://localhost:8000
+
+# API Keys
 OPENROUTER_API_KEY=your-openrouter-api-key
 TAVILY_API_KEY=your-tavily-api-key
 
