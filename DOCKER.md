@@ -2,12 +2,13 @@
 
 This guide explains how to deploy the Universal Deep Research system using Docker Compose.
 
-## Prerequisites
+## Requirements
 
 Before you begin, ensure you have the following installed on your system:
 
 - **Docker**: Version 20.10 or higher
 - **Docker Compose**: Version 2.0 or higher
+- **API Keys**: At least Tavily API key (required) and one LLM provider API key (NVIDIA, OpenAI, or OpenRouter)r
 
 You can verify your installation by running:
 
@@ -32,14 +33,19 @@ cd UniversalDeepResearch
 The backend requires API keys for LLM providers and web search functionality. Create the following files in the `backend` directory:
 
 ```bash
-# NVIDIA API key (required)
-echo "your-nvidia-api-key" > backend/nvdev_api.txt
-
 # Tavily API key (required for web search)
 echo "your-tavily-api-key" > backend/tavily_api.txt
 
+# Choose one or more LLM providers:
+
+# NVIDIA API key (optional)
+echo "your-nvidia-api-key" > backend/nvdev_api.txt
+
 # OpenAI API key (optional)
 echo "your-openai-api-key" > backend/openai_api.txt
+
+# OpenRouter API key (optional, recommended for access to multiple models)
+echo "your-openrouter-api-key" > backend/openrouter_api.txt
 ```
 
 **Important**: Make sure these files contain only the API key without any extra spaces or newlines.

@@ -1,5 +1,7 @@
 # Universal Deep Research (UDR)
 
+**English** | [Русский](README.ru.md)
+
 A prototype research system that combines user-defined strategies, intelligent web search, content analysis, and automated report generation using large language models. This repository contains both the backend API service and frontend web interface.
 
 As mentioned above, this is a research demonstration prototype and should not be used for production purposes. The software contains experimental features and research-grade implementations.

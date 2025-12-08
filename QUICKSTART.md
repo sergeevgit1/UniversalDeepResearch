@@ -5,7 +5,8 @@ Get the Universal Deep Research system running in 3 simple steps:
 ## Prerequisites
 
 - Docker 20.10+ and Docker Compose 2.0+
-- API keys for NVIDIA and Tavily
+- Tavily API key (required for web search)
+- At least one LLM provider API key: NVIDIA, OpenAI, or OpenRouter
 
 ## Steps
 
@@ -14,8 +15,15 @@ Get the Universal Deep Research system running in 3 simple steps:
 Create the required API key files in the `backend` directory:
 
 ```bash
-echo "your-nvidia-api-key" > backend/nvdev_api.txt
+# Required: Tavily for web search
 echo "your-tavily-api-key" > backend/tavily_api.txt
+
+# Choose at least one LLM provider:
+echo "your-nvidia-api-key" > backend/nvdev_api.txt
+# OR
+echo "your-openai-api-key" > backend/openai_api.txt
+# OR (recommended for access to multiple models)
+echo "your-openrouter-api-key" > backend/openrouter_api.txt
 ```
 
 ### 2. Start the Services

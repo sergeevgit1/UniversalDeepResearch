@@ -41,6 +41,7 @@ services:
       - ./backend/nvdev_api.txt:/app/nvdev_api.txt:ro
       - ./backend/tavily_api.txt:/app/tavily_api.txt:ro
       - ./backend/openai_api.txt:/app/openai_api.txt:ro
+      - ./backend/openrouter_api.txt:/app/openrouter_api.txt:ro
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "python -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8000/\")' || exit 1"]

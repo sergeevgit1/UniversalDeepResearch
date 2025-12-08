@@ -16,7 +16,7 @@
 Client management module for LLM and search API interactions.
 
 This module provides client creation and management for:
-- Large Language Models (OpenAI, NVIDIA, local vLLM)
+- Large Language Models (OpenAI, NVIDIA, OpenRouter, local vLLM)
 - Web search (Tavily API)
 - Configuration-based client setup
 """
@@ -32,7 +32,7 @@ from config import get_config
 config = get_config()
 
 # Configuration system
-ApiType = Literal["nvdev", "openai", "tavily"]
+ApiType = Literal["nvdev", "openai", "openrouter", "tavily"]
 
 
 class ModelConfig(TypedDict):
@@ -76,6 +76,62 @@ MODEL_CONFIGS: Dict[str, ModelConfig] = {
             "stream": True,
         },
     },
+    # OpenRouter models
+    "openrouter/anthropic/claude-3.5-sonnet": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "api_type": "openrouter",
+        "completion_config": {
+            "model": "anthropic/claude-3.5-sonnet",
+            "temperature": 0.2,
+            "top_p": 0.7,
+            "max_tokens": 2048,
+            "stream": True,
+        },
+    },
+    "openrouter/openai/gpt-4": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "api_type": "openrouter",
+        "completion_config": {
+            "model": "openai/gpt-4",
+            "temperature": 0.2,
+            "top_p": 0.7,
+            "max_tokens": 2048,
+            "stream": True,
+        },
+    },
+    "openrouter/meta-llama/llama-3.1-70b-instruct": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "api_type": "openrouter",
+        "completion_config": {
+            "model": "meta-llama/llama-3.1-70b-instruct",
+            "temperature": 0.2,
+            "top_p": 0.7,
+            "max_tokens": 2048,
+            "stream": True,
+        },
+    },
+    "openrouter/google/gemini-2.0-flash-exp": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "api_type": "openrouter",
+        "completion_config": {
+            "model": "google/gemini-2.0-flash-exp",
+            "temperature": 0.2,
+            "top_p": 0.7,
+            "max_tokens": 2048,
+            "stream": True,
+        },
+    },
+    "openrouter/mistralai/mistral-large": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "api_type": "openrouter",
+        "completion_config": {
+            "model": "mistralai/mistral-large",
+            "temperature": 0.2,
+            "top_p": 0.7,
+            "max_tokens": 2048,
+            "stream": True,
+        },
+    },
 }
 
 # Default model to use (from configuration)
@@ -90,7 +146,7 @@ def get_api_key(api_type: ApiType) -> str:
     The file paths can be customized via environment variables.
 
     Args:
-        api_type: The type of API to get the key for ("nvdev", "openai", "tavily")
+        api_type: The type of API to get the key for ("nvdev", "openai", "openrouter", "tavily")
 
     Returns:
         str: The API key from the configured file
@@ -106,6 +162,7 @@ def get_api_key(api_type: ApiType) -> str:
     api_key_files = {
         "nvdev": config.model.api_key_file,
         "openai": "openai_api.txt",
+        "openrouter": "openrouter_api.txt",
         "tavily": config.search.tavily_api_key_file,
     }
 
