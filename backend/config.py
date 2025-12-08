@@ -51,7 +51,7 @@ class CORSConfig:
     # Allow multiple origins separated by comma
     allow_origins: list = field(
         default_factory=lambda: [
-            url.strip()
+            url.strip().rstrip("/")
             for url in os.getenv("FRONTEND_URL", "http://localhost:3000").split(",")
         ]
     )

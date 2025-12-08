@@ -55,7 +55,8 @@ const defaultConfig: AppConfig = {
 
 // Helper function to get the full backend URL
 export const getBackendUrl = (config: AppConfig = defaultConfig): string => {
-  return config.backend.baseUrl;
+  // Ensure no trailing slash for correct API endpoint construction
+  return config.backend.baseUrl.replace(/\/$/, '');
 };
 
 // Helper function to get the API endpoint
