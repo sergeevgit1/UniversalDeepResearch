@@ -12,20 +12,19 @@ Get the Universal Deep Research system running in 3 simple steps:
 
 ### 1. Configure API Keys
 
-The default model is a free model from OpenRouter, so you only need the Tavily and OpenRouter API keys to get started.
+API keys are now set as environment variables in the `.env` file.
 
-Create the required API key files in the `backend` directory:
-
+1. **Create the `.env` file** by copying the example:
 ```bash
-# Required: Tavily for web search
-echo "your-tavily-api-key" > backend/tavily_api.txt
+cp .env.example .env
+```
 
-# Required: OpenRouter for the default free model
-echo "your-openrouter-api-key" > backend/openrouter_api.txt
+2. **Edit the `.env` file** and set your API keys. The default model requires `OPENROUTER_API_KEY` and `TAVILY_API_KEY`.
 
-# Optional: Other LLM providers
-# echo "your-nvidia-api-key" > backend/nvdev_api.txt
-# echo "your-openai-api-key" > backend/openai_api.txt
+```env
+# .env file content (example)
+OPENROUTER_API_KEY=your-openrouter-api-key
+TAVILY_API_KEY=your-tavily-api-key
 ```
 
 ### 2. Start the Services

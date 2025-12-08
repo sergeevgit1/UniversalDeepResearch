@@ -30,27 +30,26 @@ cd UniversalDeepResearch
 
 ### Step 2: Configure API Keys
 
-The backend requires API keys for LLM providers and web search functionality. The default model is a free model from OpenRouter, so only the Tavily API key is strictly required for web search functionality.
+API keys are now configured using environment variables in the `.env` file (which is loaded by `docker-compose.yml`). This is a cleaner and more secure approach than using separate files.
 
-Create the following files in the `backend` directory:
-
+1. **Create the `.env` file** by copying the example:
 ```bash
-# Tavily API key (required for web search)
-echo "your-tavily-api-key" > backend/tavily_api.txt
-
-# OpenRouter API key (required for the default model)
-echo "your-openrouter-api-key" > backend/openrouter_api.txt
-
-# Optional LLM providers:
-
-# NVIDIA API key (optional)
-echo "your-nvidia-api-key" > backend/nvdev_api.txt
-
-# OpenAI API key (optional)
-echo "your-openai-api-key" > backend/openai_api.txt
+cp .env.example .env
 ```
 
-**Important**: Make sure these files contain only the API key without any extra spaces or newlines.
+2. **Edit the `.env` file** and set your API keys. The default model requires `OPENROUTER_API_KEY` and `TAVILY_API_KEY`.
+
+```env
+# .env file content (example)
+OPENROUTER_API_KEY=your-openrouter-api-key
+TAVILY_API_KEY=your-tavily-api-key
+
+# Optional keys
+NVDEV_API_KEY=
+OPENAI_API_KEY=
+```
+
+**Important**: The `.env` file should be in the root directory of the project. Do not commit this file to version control.
 
 ### Step 3: Start the Services
 

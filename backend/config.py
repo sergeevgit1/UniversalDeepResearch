@@ -67,8 +67,14 @@ class ModelConfig:
             "LLM_BASE_URL", "https://integrate.api.nvidia.com/v1"
         )
     )
-    api_key_file: str = field(
-        default_factory=lambda: os.getenv("LLM_API_KEY_FILE", "nvdev_api.txt")
+    nvdev_api_key: str = field(
+        default_factory=lambda: os.getenv("NVDEV_API_KEY", "")
+    )
+    openai_api_key: str = field(
+        default_factory=lambda: os.getenv("OPENAI_API_KEY", "")
+    )
+    openrouter_api_key: str = field(
+        default_factory=lambda: os.getenv("OPENROUTER_API_KEY", "")
     )
     temperature: float = field(
         default_factory=lambda: float(os.getenv("LLM_TEMPERATURE", "0.2"))
@@ -83,8 +89,8 @@ class ModelConfig:
 class SearchConfig:
     """Search configuration settings."""
 
-    tavily_api_key_file: str = field(
-        default_factory=lambda: os.getenv("TAVILY_API_KEY_FILE", "tavily_api.txt")
+    tavily_api_key: str = field(
+        default_factory=lambda: os.getenv("TAVILY_API_KEY", "")
     )
     max_search_results: int = field(
         default_factory=lambda: int(os.getenv("MAX_SEARCH_RESULTS", "10"))

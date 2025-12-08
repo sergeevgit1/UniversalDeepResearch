@@ -57,12 +57,12 @@ git clone https://github.com/sergeevgit1/UniversalDeepResearch.git
 cd UniversalDeepResearch
 
 # 2. Настроить API ключи
-# OpenRouter теперь дефолтный провайдер
-echo "ваш-openrouter-api-ключ" > backend/openrouter_api.txt
-echo "ваш-tavily-api-ключ" > backend/tavily_api.txt
-
-# Опционально: для NVIDIA
-echo "ваш-nvidia-api-ключ" > backend/nvdev_api.txt
+# API ключи теперь задаются через переменные окружения в файле .env.
+# Скопируйте .env.example в .env и заполните ключи.
+cp .env.example .env
+# Откройте .env и заполните:
+# OPENROUTER_API_KEY=ваш-openrouter-api-ключ
+# TAVILY_API_KEY=ваш-tavily-api-ключ
 
 # 3. Запустить сервисы
 docker compose up -d

@@ -153,43 +153,49 @@ def get_api_key(api_type: ApiType) -> str:
     """
     Get the API key for the specified API type.
 
-    This function reads API keys from configuration-specified files.
-    The file paths can be customized via environment variables.
+    This function reads API keys from environment variables.
 
     Args:
         api_type: The type of API to get the key for ("nvdev", "openai", "openrouter", "tavily")
 
     Returns:
-        str: The API key from the configured file
+        str: The API key from the environment variable
 
     Raises:
-        FileNotFoundError: If the API key file doesn't exist
-        ValueError: If the API type is unknown
+        ValueError: If the API type is unknown or the key is not set
 
     Example:
         >>> get_api_key("tavily")
         "your-tavily-api-key"
     """
-    api_key_files = {
-        "nvdev": config.model.api_key_file,
-        "openai": "openai_api.txt",
-        "openrouter": "openrouter_api.txt",
-        "tavily": config.search.tavily_api_key_file,
+    api_key_map = {
+        "nvdev": config.model.nvdev_api_key,
+        "openai": config.model.openai_api_key,
+        "openrouter": config.model.openrouter_api_key,
+        "tavily": config.search.tavily_api_key,
     }
 
-    key_file = api_key_files.get(api_type)
-    if not key_file:
+    api_key = api_key_map.get(api_type)
+    if api_key is None:
         raise ValueError(f"Unknown API type: {api_type}")
 
-    try:
-        with open(key_file, "r") as file:
-            return file.read().strip()
-    except FileNotFoundError:
-        raise FileNotFoundError(
-            f"API key file not found for {api_type}. "
-            f"Please create {key_file} with your API key. "
-            f"See README.md for configuration instructions."
+    if not api_key:
+        env_var_name = f"{api_type.upper()}_API_KEY"
+        if api_type == "nvdev":
+            env_var_name = "NVDEV_API_KEY"
+        elif api_type == "tavily":
+            env_var_name = "TAVILY_API_KEY"
+        elif api_type == "openai":
+            env_var_name = "OPENAI_API_KEY"
+        elif api_type == "openrouter":
+            env_var_name = "OPENROUTER_API_KEY"
+
+        raise ValueError(
+            f"API key for {api_type} is not set. "
+            f"Please set the environment variable {env_var_name}."
         )
+
+    return api_key
 
 
 def create_lm_client(model_config: ModelConfig | None = None) -> OpenAI:
@@ -222,13 +228,13 @@ def create_tavily_client() -> TavilyClient:
     Create a Tavily client instance for web search functionality.
 
     This function creates a client for the Tavily search API using
-    the API key from the configured file path.
+    the API key from the environment variable.
 
     Returns:
         TavilyClient: Configured Tavily client instance
 
     Raises:
-        FileNotFoundError: If the Tavily API key file is not found
+        ValueError: If the Tavily API key is not set
 
     Example:
         >>> client = create_tavily_client()
