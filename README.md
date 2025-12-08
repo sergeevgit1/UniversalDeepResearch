@@ -23,7 +23,28 @@ As mentioned above, this is a research demonstration prototype and should not be
 
 ## Getting Started
 
-To run the prototype, you need to start both the backend and frontend services:
+You can run the prototype using either Docker Compose (recommended) or manual setup.
+
+### Option 1: Docker Compose (Recommended)
+
+The easiest way to get started is using Docker Compose, which automatically sets up both services:
+
+```bash
+# 1. Configure API keys
+echo "your-nvidia-api-key" > backend/nvdev_api.txt
+echo "your-tavily-api-key" > backend/tavily_api.txt
+
+# 2. Start the services
+docker compose up -d
+
+# 3. Access the application at http://localhost:3000
+```
+
+See [DOCKER.md](DOCKER.md) for detailed Docker deployment instructions.
+
+### Option 2: Manual Setup
+
+To run the prototype manually, you need to start both the backend and frontend services:
 
 ### 1. Backend Setup
 
@@ -81,11 +102,19 @@ See [frontend/README.md](frontend/README.md) for detailed setup instructions, in
 
 ## Documentation
 
+- [Docker Deployment Guide](DOCKER.md) - Docker Compose setup and deployment
 - [Backend Documentation](backend/README.md) - API setup, configuration, and endpoints
 - [Frontend Documentation](frontend/README.md) - UI setup, configuration, and deployment
 
 ## Requirements
 
+### For Docker Deployment
+- Docker 20.10+
+- Docker Compose 2.0+
+- API keys for LLM providers (e.g., NVIDIA NGC, OpenAI, etc.)
+- Tavily API key for web search functionality
+
+### For Manual Setup
 - Python 3.8+ (for backend)
 - Node.js 18+ (for frontend)
 - API keys for LLM providers (e.g., NVIDIA NGC, OpenAI, etc.)

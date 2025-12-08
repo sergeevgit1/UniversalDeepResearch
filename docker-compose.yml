@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: udr-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - LOG_LEVEL=info
+      - FRONTEND_URL=http://localhost:3000
+      - ALLOW_CREDENTIALS=true
+      - DEFAULT_MODEL=llama-3.1-nemotron-253b
+      - LLM_BASE_URL=https://integrate.api.nvidia.com/v1
+      - LLM_API_KEY_FILE=nvdev_api.txt
+      - LLM_TEMPERATURE=0.2
+      - LLM_TOP_P=0.7
+      - LLM_MAX_TOKENS=2048
+      - TAVILY_API_KEY_FILE=tavily_api.txt
+      - MAX_SEARCH_RESULTS=10
+      - MAX_TOPICS=1
+      - MAX_SEARCH_PHRASES=1
+      - MOCK_DIRECTORY=mock_instances/stocks_24th_3_sections
+      - RANDOM_SEED=42
+      - LOG_DIR=logs
+      - TRACE_ENABLED=true
+      - COPY_INTO_STDOUT=false
+      - LONG_CONTEXT_CUTOFF=8192
+      - FORCE_LONG_CONTEXT=false
+      - MAX_ITERATIONS=1024
+      - INTERACTION_LEVEL=none
+    volumes:
+      - ./backend/logs:/app/logs
+      - ./backend/instances:/app/instances
+      - ./backend/mock_instances:/app/mock_instances
+      # Mount API key files if they exist
+      - ./backend/nvdev_api.txt:/app/nvdev_api.txt:ro
+      - ./backend/tavily_api.txt:/app/tavily_api.txt:ro
+      - ./backend/openai_api.txt:/app/openai_api.txt:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8000/\")' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: udr-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_BACKEND_BASE_URL=http://localhost
+      - NEXT_PUBLIC_BACKEND_PORT=8000
+      - NEXT_PUBLIC_API_VERSION=v2
+      - NEXT_PUBLIC_DRY_RUN=false
+      - NEXT_PUBLIC_ENABLE_V2_API=true
+      - NEXT_PUBLIC_FRONTEND_PORT=3000
+      - NEXT_PUBLIC_FRONTEND_HOST=localhost
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  backend-logs:
+  backend-instances:
+  backend-mock-instances:
