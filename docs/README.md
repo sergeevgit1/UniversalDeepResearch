@@ -79,6 +79,11 @@ npm run lint
 
 Каждый workspace также можно запускать отдельно: `npm run dev --workspace frontend` или `npm run lint --workspace backend`.
 
+### Менеджер пакетов
+- Используемый менеджер: **npm** (см. поле `packageManager` в корневом `package.json`).
+- Файл [`.npmrc`](../.npmrc) фиксирует политику `package-lock=false`, поэтому lockfile не создаётся и не коммитится.
+- Устанавливайте зависимости из корня: `npm install --workspaces`. Backend и frontend остаются приватными workspace, сторонние зависимости не подтягиваются автоматически.
+
 ## Поддерживаемые LLM‑провайдеры
 - **NVIDIA NGC** (например, Llama 3.1 Nemotron 253B, Llama 3.1 8B Instruct)
 - **OpenAI** (GPT‑4, GPT‑3.5 Turbo и др.)
