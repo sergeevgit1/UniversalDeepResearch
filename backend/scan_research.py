@@ -503,7 +503,7 @@ def produce_report(
 ) -> str:
     topic_relevant_segments_str: str = "\n".join(
         [
-            f"Topic: {topic}\n{'\n'.join(segments)}"
+            f"Topic: {topic}\n" + "\n".join(segments)
             for topic, segments in topic_relevant_segments.items()
         ]
     )
