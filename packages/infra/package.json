@@ -1,0 +1,7 @@
+{
+  "name": "@udr/infra",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared infrastructure configuration for the Universal Deep Research turborepo",
+  "license": "MIT"
+}

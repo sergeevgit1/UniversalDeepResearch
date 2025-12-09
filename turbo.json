@@ -5,11 +5,11 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [
-        "frontend/.next/**",
-        "frontend/.turbo/**",
-        "frontend/public/build-manifest.json",
-        "backend/__pycache__/**",
-        "backend/**/*.pyc"
+        "apps/frontend/.next/**",
+        "apps/frontend/.turbo/**",
+        "apps/frontend/public/build-manifest.json",
+        "apps/backend/__pycache__/**",
+        "apps/backend/**/*.pyc"
       ]
     },
     "lint": {

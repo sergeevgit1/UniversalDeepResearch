@@ -26,8 +26,8 @@
 
 ### Вариант 2. Текстовые файлы (альтернатива)
 ```bash
-echo "your-tavily-api-key" > backend/tavily_api.txt
-echo "your-llm-api-key" > backend/nvdev_api.txt
+echo "your-tavily-api-key" > apps/backend/tavily_api.txt
+echo "your-llm-api-key" > apps/backend/nvdev_api.txt
 ```
 Убедитесь, что файлы остаются в `.gitignore`.
 

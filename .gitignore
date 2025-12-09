@@ -77,9 +77,9 @@ nvdev_api.txt
 instances/
 mock_instances/
 logs/
-
-# Docker
-.dockerignore
+apps/backend/instances/
+apps/backend/mock_instances/
+apps/backend/logs/
 
 # Vercel
 .vercel
