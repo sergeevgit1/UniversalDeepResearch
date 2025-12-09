@@ -87,3 +87,6 @@ logs/
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Turborepo cache
+.turbo/
