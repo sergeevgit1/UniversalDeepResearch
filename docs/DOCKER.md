@@ -87,9 +87,9 @@ docker compose up -d --build
 
 ## Хранение данных
 В качестве томов монтируются директории:
-- `backend/logs` — логи приложения
-- `backend/instances` — данные исследований
-- `backend/mock_instances` — тестовые данные
+- `apps/backend/logs` — логи приложения
+- `apps/backend/instances` — данные исследований
+- `apps/backend/mock_instances` — тестовые данные
 
 ## Частые проблемы
 ### Нет соединения с backend
@@ -109,7 +109,7 @@ docker compose up -d --build
 ### Права на тома
 Если появляются ошибки прав, поправьте владельца:
 ```bash
-sudo chown -R $USER:$USER backend/logs backend/instances
+sudo chown -R $USER:$USER apps/backend/logs apps/backend/instances
 ```
 
 ## Режим разработки
@@ -119,7 +119,7 @@ version: '3.8'
 services:
   backend:
     volumes:
-      - ./backend:/app
+      - ./apps/backend:/app
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
   frontend:

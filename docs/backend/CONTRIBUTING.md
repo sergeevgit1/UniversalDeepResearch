@@ -6,7 +6,7 @@
 1. Сделайте форк и клонируйте репозиторий:
    ```bash
    git clone <ваш-fork-url>
-   cd backend
+   cd apps/backend
    ```
 2. Настройте окружение:
    ```bash

@@ -6,7 +6,7 @@
 1. Форкните репозиторий и клонируйте его:
    ```bash
    git clone <your-fork-url>
-   cd frontend
+   cd apps/frontend
    ```
 2. Установите зависимости:
    ```bash
