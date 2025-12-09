@@ -45,6 +45,29 @@ const validateEnvVar = (value: string | undefined, defaultValue: string): string
   return value;
 };
 
+// Helper to determine the backend base URL when an explicit env variable isn't provided.
+const resolveBackendBaseUrl = (): string => {
+  const envUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+  if (envUrl && envUrl.trim()) {
+    return envUrl.trim();
+  }
+
+  // When running in the browser, fall back to the current origin so deployed
+  // frontends talk to their colocated backend without extra configuration.
+  if (typeof window !== 'undefined' && window.location.origin) {
+    return window.location.origin;
+  }
+
+  // Use the platform-provided host when available (e.g., Vercel).
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  // Development fallback.
+  return 'http://localhost:8000';
+};
+
 // Helper function to parse boolean environment variables
 const parseBoolEnv = (value: string | undefined, defaultValue: boolean): boolean => {
   if (!value) return defaultValue;
@@ -54,7 +77,7 @@ const parseBoolEnv = (value: string | undefined, defaultValue: boolean): boolean
 // Default configuration
 const defaultConfig: AppConfig = {
   backend: {
-    baseUrl: validateEnvVar(process.env.NEXT_PUBLIC_BACKEND_URL, 'http://localhost:8000'),
+    baseUrl: resolveBackendBaseUrl(),
     port: 0, // Port is now included in baseUrl
     apiVersion: (validateEnvVar(process.env.NEXT_PUBLIC_API_VERSION, 'v2') as 'v1' | 'v2'),
   },
