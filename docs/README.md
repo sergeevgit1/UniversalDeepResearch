@@ -21,6 +21,7 @@
 │   ├── backend/          # Код backend сервиса (Python, FastAPI)
 │   └── frontend/         # Код frontend приложения (Next.js)
 ├── packages/
+│   ├── config/           # Общие конфигурации линтеров/форматтеров
 │   └── infra/            # Общие скрипты/конфигурации инфраструктуры
 ├── docker-compose.yml    # Оркестрация сервисов
 └── docs/                 # Вся документация (этот файл)
@@ -88,6 +89,7 @@ turbo run build --filter=packages/infra
 ### Workspaces
 - `apps/frontend` — Next.js интерфейс
 - `apps/backend` — FastAPI backend
+- `packages/config` — общие конфигурации линтеров и форматтеров
 - `packages/infra` — общие скрипты инфраструктуры, контейнеризация, CI заготовки
 
 ### Политика окружения и кеша
