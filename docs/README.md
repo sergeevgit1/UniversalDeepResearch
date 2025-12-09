@@ -17,8 +17,11 @@
 /
 ├── turbo.json            # Настройка Turborepo пайплайнов
 ├── package.json          # Workspaces и команды верхнего уровня
-├── backend/              # Код backend сервиса (Python, FastAPI)
-├── frontend/             # Код frontend приложения (Next.js)
+├── apps/
+│   ├── backend/          # Код backend сервиса (Python, FastAPI)
+│   └── frontend/         # Код frontend приложения (Next.js)
+├── packages/
+│   └── infra/            # Общие скрипты/конфигурации инфраструктуры
 ├── docker-compose.yml    # Оркестрация сервисов
 └── docs/                 # Вся документация (этот файл)
     ├── QUICKSTART.md
@@ -55,29 +58,48 @@ docker compose up -d
 Подробности см. в [QUICKSTART.md](QUICKSTART.md) и [DOCKER.md](DOCKER.md).
 
 ### Вариант 2. Ручная установка
-1. Настройте backend по инструкции в [backend/README.md](backend/README.md)
-2. Настройте frontend по инструкции в [frontend/README.md](frontend/README.md)
+1. Настройте backend (код в `apps/backend`) по инструкции [backend/README.md](backend/README.md)
+2. Настройте frontend (код в `apps/frontend`) по инструкции [frontend/README.md](frontend/README.md)
 3. Запустите оба сервиса и откройте `http://localhost:3000`
 
 ## Turborepo (монорепозиторий)
 
-Проект организован как Turborepo: backend и frontend остаются самостоятельными приложениями, но теперь собираются и проверяются
-едиными командами с кешированием и параллельным выполнением (см. рекомендации в [refactoring_proposals.md](refactoring_proposals.md)).
+Проект организован как Turborepo: все приложения лежат в `apps/`, общая инфраструктура в `packages/infra`. Кеширование и зависимости отслеживаются едиными пайплайнами (см. [refactoring_proposals.md](refactoring_proposals.md)).
 
-Команды верхнего уровня (выполняются из корня репозитория):
+### Основные команды Turbo (из корня)
 
 ```bash
-# Запуск обеих частей в режиме разработки с параллельным выводом
-npm run dev
+# Запуск дев-серверов фронтенда и бэкенда параллельно
+npm run dev             # эквивалент turbo run dev --parallel
 
-# Сборка обеих частей с учётом зависимостей
-npm run build
+# Сборка всех приложений с учётом зависимостей между workspace
+npm run build           # turbo run build
 
-# Базовая проверка синтаксиса (Next.js + быстрая проверка Python через compileall)
-npm run lint
+# Быстрая проверка кода (Next.js + compileall для Python)
+npm run lint            # turbo run lint
+
+# Точечный запуск конкретного приложения
+turbo run dev --filter=apps/frontend
+turbo run lint --filter=apps/backend
+turbo run build --filter=packages/infra
 ```
 
-Каждый workspace также можно запускать отдельно: `npm run dev --workspace frontend` или `npm run lint --workspace backend`.
+### Workspaces
+- `apps/frontend` — Next.js интерфейс
+- `apps/backend` — FastAPI backend
+- `packages/infra` — общие скрипты инфраструктуры, контейнеризация, CI заготовки
+
+### Политика окружения и кеша
+- `.env`/`.env.local` хранятся в соответствующих workspace (`apps/frontend/.env.local`, `apps/backend/.env`).
+- Кеш Turborepo хранится локально в `.turbo` и может быть очищен командой `turbo prune` или удалением каталога `.turbo`.
+- Запуски `dev` не кешируются (`persistent: true`), сборки и линтинг используют кеш, поэтому их лучше запускать через `turbo run ...`.
+- Для удалённого кеша используйте переменные `TURBO_TOKEN` и `TURBO_TEAM` (при необходимости CI), но не храните их в репозитории.
+
+### Troubleshooting Turborepo
+- Несоответствие Node.js: убедитесь, что установлен Node.js версии из `packageManager` в `package.json`.
+- Проблемы с зависимостями: выполните `rm -rf node_modules .turbo` и `npm install`.
+- Ошибки путей после обновления структуры: проверьте, что команды выполняются из корня и фильтры указывают на `apps/*` или `packages/infra`.
+- Если кеш повредился в CI, отключите его временно: `TURBO_CACHE=none turbo run build`.
 
 ## Поддерживаемые LLM‑провайдеры
 - **NVIDIA NGC** (например, Llama 3.1 Nemotron 253B, Llama 3.1 8B Instruct)
