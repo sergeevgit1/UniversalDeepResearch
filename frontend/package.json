@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint --config ../.eslintrc.js --ext .js,.jsx,.ts,.tsx .",
+    "fmt": "prettier --config ../.prettierrc --ignore-path ../.gitignore --write \"src/**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
