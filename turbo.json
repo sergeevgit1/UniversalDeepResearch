@@ -16,6 +16,10 @@
       "dependsOn": ["^lint"],
       "outputs": []
     },
+    "fmt": {
+      "dependsOn": ["^fmt"],
+      "outputs": []
+    },
     "dev": {
       "cache": false,
       "persistent": true
