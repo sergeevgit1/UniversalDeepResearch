@@ -15,8 +15,10 @@
 ## Структура проекта
 ```
 /
-├── backend/              # Код backend сервиса
-├── frontend/             # Код frontend приложения
+├── turbo.json            # Настройка Turborepo пайплайнов
+├── package.json          # Workspaces и команды верхнего уровня
+├── backend/              # Код backend сервиса (Python, FastAPI)
+├── frontend/             # Код frontend приложения (Next.js)
 ├── docker-compose.yml    # Оркестрация сервисов
 └── docs/                 # Вся документация (этот файл)
     ├── QUICKSTART.md
@@ -56,6 +58,26 @@ docker compose up -d
 1. Настройте backend по инструкции в [backend/README.md](backend/README.md)
 2. Настройте frontend по инструкции в [frontend/README.md](frontend/README.md)
 3. Запустите оба сервиса и откройте `http://localhost:3000`
+
+## Turborepo (монорепозиторий)
+
+Проект организован как Turborepo: backend и frontend остаются самостоятельными приложениями, но теперь собираются и проверяются
+едиными командами с кешированием и параллельным выполнением (см. рекомендации в [refactoring_proposals.md](refactoring_proposals.md)).
+
+Команды верхнего уровня (выполняются из корня репозитория):
+
+```bash
+# Запуск обеих частей в режиме разработки с параллельным выводом
+npm run dev
+
+# Сборка обеих частей с учётом зависимостей
+npm run build
+
+# Базовая проверка синтаксиса (Next.js + быстрая проверка Python через compileall)
+npm run lint
+```
+
+Каждый workspace также можно запускать отдельно: `npm run dev --workspace frontend` или `npm run lint --workspace backend`.
 
 ## Поддерживаемые LLM‑провайдеры
 - **NVIDIA NGC** (например, Llama 3.1 Nemotron 253B, Llama 3.1 8B Instruct)

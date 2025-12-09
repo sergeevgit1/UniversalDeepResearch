@@ -1,0 +1,24 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["docs/refactoring_proposals.md"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        "frontend/.next/**",
+        "frontend/.turbo/**",
+        "frontend/public/build-manifest.json",
+        "backend/__pycache__/**",
+        "backend/**/*.pyc"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}
