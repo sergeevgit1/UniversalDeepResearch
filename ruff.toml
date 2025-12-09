@@ -1,12 +1,1 @@
-line-length = 100
-target-version = "py311"
-respect-gitignore = true
-
-[lint]
-select = ["E", "F", "I", "W"]
-ignore = ["E203"]
-
-[format]
-quote-style = "single"
-indent-width = 2
-line-ending = "lf"
+extend = "packages/config/ruff.toml"
