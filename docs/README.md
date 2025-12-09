@@ -28,6 +28,7 @@
     ├── ENVIRONMENT_VARIABLES.md
     ├── TROUBLESHOOTING.md
     ├── OPENROUTER.md
+    ├── sprint_roadmap.md     # Дорожная карта инфраструктурных спринтов
     ├── backend/          # Документация backend
     └── frontend/         # Документация frontend
 ```
